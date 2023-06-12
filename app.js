@@ -93,43 +93,43 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-passport.use(new GoogleStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    //callbackURL: "http://localhost:3000/auth/google/secrets",
-    callbackURL: "https://my-college-project-site.onrender.com/auth/google/secrets",
-    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    console.log(profile);
+// passport.use(new GoogleStrategy({
+//     clientID: process.env.CLIENT_ID,
+//     clientSecret: process.env.CLIENT_SECRET,
+//     //callbackURL: "http://localhost:3000/auth/google/secrets",
+//     callbackURL: "https://my-college-project-site.onrender.com/auth/google/secrets",
+//     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
+//   },
+//   function(accessToken, refreshToken, profile, cb) {
+//     console.log(profile);
 
-    User.findOrCreate({
-      googleId: profile.id
-    }, function(err, user) {
-      return cb(err, user);
-    });
-  }
-));
+//     User.findOrCreate({
+//       googleId: profile.id
+//     }, function(err, user) {
+//       return cb(err, user);
+//     });
+//   }
+// ));
 
 
 app.get("/", function(req, res) {
   res.render("home1");
 });
 
-app.get("/auth/google",
-  passport.authenticate('google', {
-    scope: ["profile"]
-  })
-);
+// app.get("/auth/google",
+//   passport.authenticate('google', {
+//     scope: ["profile"]
+//   })
+// );
 
-app.get("/auth/google/secrets",
-  passport.authenticate('google', {
-    failureRedirect: "/login2"
-  }),
-  function(req, res) {
-    // Successful authentication, redirect to secrets.
-    res.redirect("/secrets");
-  });
+// app.get("/auth/google/secrets",
+//   passport.authenticate('google', {
+//     failureRedirect: "/login2"
+//   }),
+//   function(req, res) {
+//     // Successful authentication, redirect to secrets.
+//     res.redirect("/secrets");
+//   });
 
 
 
